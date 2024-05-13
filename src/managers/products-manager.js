@@ -10,7 +10,8 @@ class ProductManager {
     try {
       if (fs.existsSync(this.path)) {
         const products = await fs.promises.readFile(this.path, "utf8");
-        return JSON.parse(products);
+        if (!products) return []
+        else return JSON.parse(products);
       } else return [];
     } catch (error) {
       console.error(error);
@@ -25,8 +26,6 @@ class ProductManager {
         ...obj,
       };
       const products = await this.getProducts();
-      console.log(products)
-      console.log(newProduct)
       products.push(newProduct);
       await fs.promises.writeFile(this.path, JSON.stringify(products));
       return newProduct;
@@ -38,8 +37,12 @@ class ProductManager {
   async getProductById(id) {
     try {
       const products = await this.getProducts();
-      const productExist = products.find((product) => product.id === id);
-      if (!productExist) return null;
+      const productExist = products.find((product)=>{
+        product.id === id
+        console.log(`soy el product id: ${product.id}`);
+        console.log(`soy el id: ${id}`);
+      });
+      return productExist || null;
     } catch (error) {
       console.error(error);
     }
