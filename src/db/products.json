@@ -1,1 +1,22 @@
-[{"id":"6e5ee73b-d734-4b8b-ab11-0c259b20bca1","status":true,"title":"Iphone 15 Pro MAX","description":"Celular alta gama","code":"Iphone","price":1500,"stock":25,"category":"celular"},{"id":"e824dcb6-914f-4806-a92c-1486ba3c4c9d","status":true,"title":"Samsung Galaxy S23","description":"Celular alta gama","code":"S23","price":1000,"stock":13,"category":"celular"}]
+[
+	{
+		"id": "742a7652-40b1-4e9f-9ca6-de4be20ab2e8",
+		"status": true,
+		"title": "Samsung Galaxy S23",
+		"description": "Celular alta gama",
+		"code": "S23",
+		"price": 1000,
+		"stock": 30,
+		"category": "celular"
+	},
+	{
+		"id": "0d4c6c48-d8f2-4287-ac68-cbc05179bca1",
+		"status": true,
+		"title": "Motorola G7",
+		"description": "Celular baja gama",
+		"code": "Moto",
+		"price": 350,
+		"stock": 40,
+		"category": "celular"
+	}
+]

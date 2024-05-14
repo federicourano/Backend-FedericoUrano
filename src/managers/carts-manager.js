@@ -16,15 +16,15 @@ class CartsManager {
         try {
             if (fs.existsSync(this.path)) {
                 const cartsFile = await fs.promises.readFile(this.path, 'utf-8');
-                const carts = JSON.parse(cartsFile);
-                return carts;
+                if (!cartsFile) return []
+                else return JSON.parse(cartsFile);
             } else return [];
         } catch (error) {
           console.error(error);  
         }
     }
 
-    async NewCarts() {
+    async newCarts() {
         try {
             const newCart = {
                 id: uuid(),
@@ -32,7 +32,7 @@ class CartsManager {
             };
             const carts = await this.getCarts();
             carts.push(newCart);
-            await fs.promises.writeFile(this.path, JSON.stringify(carts, null, '\t'));
+            await fs.promises.writeFile(this.path, JSON.stringify(carts));
             return newCart;
         } catch (error) {
             console.error(error);
@@ -43,7 +43,7 @@ class CartsManager {
         try {
             const carts = await this.getCarts();
             const cart = carts.find(cart => cart.id === id);
-            if(!cart) return null;
+            return cart || null;
         } catch (error) {
             console.error(error);
         }

@@ -37,11 +37,7 @@ class ProductManager {
   async getProductById(id) {
     try {
       const products = await this.getProducts();
-      const productExist = products.find((product)=>{
-        product.id === id
-        console.log(`soy el product id: ${product.id}`);
-        console.log(`soy el id: ${id}`);
-      });
+      const productExist = products.find((product)=>product.id === id);
       return productExist || null;
     } catch (error) {
       console.error(error);
@@ -51,7 +47,7 @@ class ProductManager {
   async modifyProduct(id, obj) {
     try {
       const products = await this.getProducts();
-      let productExists = await this.getProductById(id)
+      let productExists = products.find((product)=>product.id === id);
       if (productExists) {
         productExists = { ...productExists, ...obj };
       } else return null;

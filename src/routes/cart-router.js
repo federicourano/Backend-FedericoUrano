@@ -9,7 +9,7 @@ cartRouter.post("/:idCart/product/:idProd", async (req, res, next) => {
     try {
        const { idProd } = req.params;
        const { idCart } = req.params;
-       const cart = await cartManager.saveProductToCart(idCart, idProd);
+       const cart = await cartManager.addProductToCart(idCart, idProd);
        res.status(200).json(cart);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -18,7 +18,8 @@ cartRouter.post("/:idCart/product/:idProd", async (req, res, next) => {
 
 cartRouter.post("/", async (req, res) => {
     try {
-      res.json(await cartManager.createCart());
+      const cart = await cartManager.newCarts();
+      res.status(201).json(cart);
     } catch (error) {
       res.status(500).json(error.message);
     }
@@ -26,8 +27,9 @@ cartRouter.post("/", async (req, res) => {
 
 cartRouter.get("/:idCart", async (req, res) => {
     try {
-      const {idCart} = req.params
-      res.json(await cartManager.getCartById(idCart))
+      const {idCart} = req.params;
+      const cart = await cartManager.getCartById(idCart);
+      !cart ? res.status(404).json({ error: "Cart not found" }) : res.status(200).json(cart);
     } catch (error) {
       console.log(error);
     }

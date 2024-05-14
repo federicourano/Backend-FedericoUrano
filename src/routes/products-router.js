@@ -41,9 +41,9 @@ productsRouter.post('/', productValidator, async (req, res)=>{
 productsRouter.put("/:idProd", async (req, res) => {
     try {
       const { idProd } = req.params;
-      const prodUpd = await productManager.modifyProduct(req.body, idProd);
-      if (!prodUpd) res.status(404).json({ msg: "Error updating prod" });
-      res.status(200).json(prodUpd);
+      const prodObj = req.body;
+      const prodUpd = await productManager.modifyProduct(idProd, prodObj);
+      !prodUpd ? res.status(404).json({ error: "Product not found" }) : res.status(200).json(prodUpd);
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
