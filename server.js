@@ -50,7 +50,6 @@ socketServer.on("connection", async (socket)=>{
     socket.on('disconnect', () => console.log(`Client disconnected`));
 
     socket.on('newProduct', async (newProduct) => {
-
         productManager.newProducts(newProduct);
         const products = await productManager.getProducts();
         socketServer.emit('products', products);
