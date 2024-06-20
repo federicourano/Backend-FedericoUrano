@@ -7,6 +7,7 @@ import { __dirname } from "./src/path.js";
 import viewRouter from "./src/routes/views-router.js"
 import { Server } from "socket.io";
 import ProductManager from "./src/managers/products-manager.js";
+import { initMongoDB } from "./src/db/conexion.js";
 
 const productManager = new ProductManager(`${__dirname}/db/products.json`)
 
@@ -18,21 +19,25 @@ app.use(express.urlencoded({extended:true}))
 
 app.use(express.static(`${__dirname}/public`));
 
-app.use('/api/carts', cartRouter);
+//app.use('/api/carts', cartRouter);
 
-app.use('/api/products', productsRouter);
+//app.use('/api/products', productsRouter);
 
-app.use(errorHandler);
+//app.use(errorHandler);
 
-app.use('/', viewRouter);
+//app.use('/', viewRouter);
 
 const PORT = 8080;
+
+app.use("/products", productsRouter)
 
 app.engine("handlebars", handlebars.engine());
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "handlebars");
 
 app.use("/", viewRouter);
+
+initMongoDB();
 
 const httpServer = app.listen(PORT, () => {
     console.log(`Servidor creadon con Exoress en el puerto ${PORT}`);

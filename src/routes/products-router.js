@@ -3,8 +3,24 @@ import { __dirname } from "../path.js";
 import ProductManager from "../managers/products-manager.js";
 import {productValidator} from '../middlewares/productValidator.js'
 
+import * as controllers from "../controllers/products.controller.js"
+
 const productsRouter = Router();
-const productManager = new ProductManager(`${__dirname}/db/products.json`);
+
+const router = Router();
+
+router.get("/", controllers.getAllProducts);
+
+router.get("/:id", controllers.getProductById);
+
+router.post("/", controllers.createProduct);
+
+router.put("/:id", controllers.updateProduct);
+
+router.delete("/:id", controllers.deleteProduct);
+
+export default router; 
+/* const productManager = new ProductManager(`${__dirname}/db/products.json`);
 
 productsRouter.get('/', async(req, res) => {
     try {
@@ -59,5 +75,4 @@ productsRouter.delete("/:idProd", async (req, res) => {
       res.status(500).json({ msg: error.message });
     }
   });
-
-export default productsRouter;
+*/
