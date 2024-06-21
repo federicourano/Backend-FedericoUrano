@@ -20,7 +20,10 @@ router.put("/:id", controllers.updateProduct);
 router.delete("/:id", controllers.deleteProduct);
 
 export default router; 
-/* const productManager = new ProductManager(`${__dirname}/db/products.json`);
+
+
+
+const productManager = new ProductManager(`${__dirname}/db/products.json`);
 
 productsRouter.get('/', async(req, res) => {
     try {
@@ -75,4 +78,4 @@ productsRouter.delete("/:idProd", async (req, res) => {
       res.status(500).json({ msg: error.message });
     }
   });
-*/
+

@@ -19,13 +19,13 @@ app.use(express.urlencoded({extended:true}))
 
 app.use(express.static(`${__dirname}/public`));
 
-//app.use('/api/carts', cartRouter);
+app.use('/api/carts', cartRouter);
 
-//app.use('/api/products', productsRouter);
+app.use('/api/products', productsRouter);
 
-//app.use(errorHandler);
+app.use('/', viewRouter);
 
-//app.use('/', viewRouter);
+app.use(errorHandler);
 
 const PORT = 8080;
 
@@ -37,7 +37,9 @@ app.set("view engine", "handlebars");
 
 app.use("/", viewRouter);
 
-initMongoDB();
+const PERSISTENCE = 'fs';
+
+if(PERSISTENCE === 'mongo') initMongoDB();
 
 const httpServer = app.listen(PORT, () => {
     console.log(`Servidor creadon con Exoress en el puerto ${PORT}`);

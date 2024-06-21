@@ -1,11 +1,8 @@
-import { ProductModel } from "../models/products-models.js";
-import ProductManager from "../managers/products-manager.js";
-
-const prodManager = new ProductManager(ProductModel);
+import * as service from "../services/product.services.js";
 
 export const getAllProducts = async (req, res, next) => {
   try {
-    const prods = await prodManager.getAll();
+    const prods = await service.getAll();
     res.json(prods);
   } catch (error) {
     next(error);
@@ -15,7 +12,7 @@ export const getAllProducts = async (req, res, next) => {
 export const getProductById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const product = await prodManager.getById(id);
+    const product = await service.getById(id);
     if(!product) res.status(404).json({msj: 'Product not found'});
     else res.json(product);
   } catch (error) {
@@ -25,7 +22,7 @@ export const getProductById = async (req, res, next) => {
 
 export const createProduct = async (req, res, next) => {
   try {
-    const newProd = await prodManager.create(req.body);
+    const newProd = await service.create(req.body);
     res.json(newProd);
   } catch (error) {
     next(error);
@@ -35,7 +32,7 @@ export const createProduct = async (req, res, next) => {
 export const updateProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const prodUpd = await prodManager.update(id, req.body);
+    const prodUpd = await service.update(id, req.body);
     res.json(prodUpd);
   } catch (error) {
     next(error);
@@ -45,7 +42,7 @@ export const updateProduct = async (req, res, next) => {
 export const deleteProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const prodDel = await prodManager.delete(id);
+    const prodDel = await service.remove(id);
     res.json(prodDel);
   } catch (error) {
     next(error);
