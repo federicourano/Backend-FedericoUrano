@@ -37,7 +37,7 @@ app.set("view engine", "handlebars");
 
 app.use("/", viewRouter);
 
-const PERSISTENCE = 'fs';
+const PERSISTENCE = 'mongo';
 
 if(PERSISTENCE === 'mongo') initMongoDB();
 
