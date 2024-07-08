@@ -9,15 +9,15 @@ const productsRouter = Router();
 
 const router = Router();
 
-router.get("/", controllers.getAllProducts);
+router.get("/", controllers.getAll);
 
-router.get("/:id", controllers.getProductById);
+router.get("/:id", controllers.getById);
 
-router.post("/", controllers.createProduct);
+router.post("/", controllers.create);
 
-router.put("/:id", controllers.updateProduct);
+router.put("/:id", controllers.update);
 
-router.delete("/:id", controllers.deleteProduct);
+router.delete("/:id", controllers.remove);
 
 export default router; 
 

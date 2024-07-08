@@ -30,6 +30,7 @@ app.use(errorHandler);
 const PORT = 8080;
 
 app.use("/products", productsRouter)
+app.use("/carts", cartRouter)
 
 app.engine("handlebars", handlebars.engine());
 app.set("views", `${__dirname}/views`);
@@ -42,7 +43,7 @@ const PERSISTENCE = 'mongo';
 if(PERSISTENCE === 'mongo') initMongoDB();
 
 const httpServer = app.listen(PORT, () => {
-    console.log(`Servidor creadon con Exoress en el puerto ${PORT}`);
+    console.log(`Servidor creadon con Express en el puerto ${PORT}`);
 });
 
 const socketServer = new Server(httpServer);

@@ -5,9 +5,9 @@ const prodDao = new ProductDaoMongoDB();
 //import ProductManager from '../managers/products-manager.js';
 //const prodDao = new ProductManager(`${__dirname}/db/products.json`);
 
-export const getAll = async () => {
+export const getAll = async (page, limit, title, sort) => {
   try {
-    return await prodDao.getAll();
+    return await prodDao.getAll(page, limit, title, sort);
   } catch (error) {
     throw new Error(error);
   }

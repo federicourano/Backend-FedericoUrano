@@ -1,6 +1,30 @@
 import { Router } from "express";
 import CartsManager from "../managers/carts-manager.js";
+import * as controller from "../controllers/cart.controllers.js";
 import { __dirname } from "../path.js";
+
+const router = Router();
+
+router.get("/", controller.getAll);
+
+router.get("/:id", controller.getById);
+
+router.post("/", controller.create);
+
+router.put("/:id", controller.update);
+
+router.delete("/:id", controller.remove);
+
+router.post("/:idCart/products/:idProd", controller.addProdToCart);
+
+router.delete("/:idCart/products/:idProd", controller.removeProdToCart);
+
+router.put("/:idCart/products/:idProd", controller.updateProdQuantityToCart);
+
+router.delete("/clear/:idCart", controller.clearCart);
+
+export default router;
+
 
 const cartManager = new CartsManager(`${__dirname}/db/carts.json`);
 const cartRouter = Router();
@@ -34,5 +58,3 @@ cartRouter.get("/:idCart", async (req, res) => {
       console.log(error);
     }
   });
-
-export default cartRouter
